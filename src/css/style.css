@@ -1,16 +1,35 @@
 body {
     margin: 0;
+    height: 100vh;
     background-image: url("../images/fond.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
-.rocket {
-    width: 20%;
-    cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/tina.gif") 10 3, auto;
-
+.portal {
+    width: 200px;
+    height: 200px;
 }
 
-div {
+.rocket {
+    animation: rotate 20s linear infinite;
+}
+
+.money {
     color: white;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg); /* Rotation initiale */
+        width: 90%;
+    }
+    50% {
+        transform: rotate(180deg); /* Rotation complète */
+        width: 100%;
+    }
+    100% {
+        transform: rotate(360deg); 
+        width: 90%;
+    }
 }

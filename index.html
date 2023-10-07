@@ -9,16 +9,49 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
+    <div class="portal">
         <img id="clickEvent" class="rocket" src="src/images/portal.png">
-        <div id="number">0</div>
-    
+    </div>
+    <div id="number" class="money">0</div>
+    <div>
+        <span>Portal Gun</span>
+        <span id="portallevel">0</span>
+        <span id="portalprice">0</span>
+        <span id="portalearn">0</span>
+        <button id="portalgun">Augmenter de niveau Clicker</button>
+    </div>
+    <div>
+        <span>Jerry Smith</span>
+        <span id="jerrylevel">0</span>
+        <span id="jerryprice">0</span>
+        <span id="jerryearn">0</span>
+        <button id="jerry">Augmenter de niveau Clicker</button>
+    </div>
 </body>
 <script>
-    let click = 0;
-    $("#clickEvent").on("click", function () {
-        click += 1;
-        $("#number").html(click);
+    const user = new User("Alfred")
+    const portalGun = new Clicker("Pisto-Portail", 5, 1, false);
+    const jerry = new Clicker("Jerry Smith", 30, 10, true);
+
+    setInterval(function(){
+        $("#number").html(user.getMoney);
+        $("#portallevel").html(Math.round(portalGun.level));
+        $("#portalprice").html(Math.round(portalGun.price));
+        $("#portalearn").html(Math.round(portalGun.earnings));
+    }, 10);
+
+    $("#clickEvent").click(function () {
+        portalGun.click(user);
     });
+
+    $("#portalgun").click(function(){ 
+        portalGun.increaseLevel(user);
+    });
+
+    $("#jerry").click(function(){ 
+        jerry.increaseLevel(user);
+    });
+    
     
 </script>
 </html>
