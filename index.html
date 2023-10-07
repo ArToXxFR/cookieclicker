@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coockie Clicker</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <script src="src/js/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+        <img id="clickEvent" class="rocket" src="src/images/portal.png">
+        <div id="number">0</div>
+    
+</body>
+<script>
+    let click = 0;
+    $("#clickEvent").on("click", function () {
+        click += 1;
+        $("#number").html(click);
+    });
+    
+</script>
+</html>

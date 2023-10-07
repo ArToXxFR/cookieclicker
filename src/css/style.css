@@ -1,0 +1,16 @@
+body {
+    margin: 0;
+    background-image: url("../images/fond.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.rocket {
+    width: 20%;
+    cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/9632/tina.gif") 10 3, auto;
+
+}
+
+div {
+    color: white;
+}
