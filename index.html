@@ -12,12 +12,12 @@
     <div class="portal">
         <img id="clickEvent" class="rocket" src="src/images/portal.png">
     </div>
-    <div id="number" class="money">0</div>
+    <div id="money" class="money">0</div>
     <div>
         <span>Portal Gun</span>
-        <span id="portallevel">0</span>
-        <span id="portalprice">0</span>
-        <span id="portalearn">0</span>
+        <span id="portalGunlevel">0</span>
+        <span id="portalGunprice">0</span>
+        <span id="portalGunearn">0</span>
         <button id="portalgun">Augmenter de niveau Clicker</button>
     </div>
     <div>
@@ -27,30 +27,89 @@
         <span id="jerryearn">0</span>
         <button id="jerry">Augmenter de niveau Clicker</button>
     </div>
+    <div>
+        <span>Beth Smith</span>
+        <span id="bethlevel">0</span>
+        <span id="bethprice">0</span>
+        <span id="bethearn">0</span>
+        <button id="beth">Augmenter de niveau Clicker</button>
+    </div>
+    <div>
+        <span>Summer Smith</span>
+        <span id="summerlevel">0</span>
+        <span id="summerprice">0</span>
+        <span id="summerearn">0</span>
+        <button id="summer">Augmenter de niveau Clicker</button>
+    </div>
+    <div>
+        <span>Morty Smith</span>
+        <span id="mortylevel">0</span>
+        <span id="mortyprice">0</span>
+        <span id="mortyearn">0</span>
+        <button id="morty">Augmenter de niveau Clicker</button>
+    </div>
+    <div>
+        <span>Rick Sanchez</span>
+        <span id="ricklevel">0</span>
+        <span id="rickprice">0</span>
+        <span id="rickearn">0</span>
+        <button id="rick">Augmenter de niveau Clicker</button>
+    </div>
 </body>
 <script>
     const user = new User("Alfred")
     const portalGun = new Clicker("Pisto-Portail", 5, 1, false);
-    const jerry = new Clicker("Jerry Smith", 30, 10, true);
+    const jerry = new Jerry("Jerry Smith", 30, 2, true);  
+    const beth = new Beth("Beth Smith", 150, 8, true);  
+    const summer = new Clicker("Summer Smith", 1000, 15, true);  
+    const morty = new Clicker("Morty Smith", 5000, 30, true);  
+    const rick = new Clicker("Rick Sanchez", 25000, 80, true);  
 
-    setInterval(function(){
-        $("#number").html(user.getMoney);
-        $("#portallevel").html(Math.round(portalGun.level));
-        $("#portalprice").html(Math.round(portalGun.price));
-        $("#portalearn").html(Math.round(portalGun.earnings));
+    setInterval(() => {
+
+        // Actualiser l'argent
+        $("#money").html(user.getMoney);
+
+        // Portal Gun
+        $("#portalGunlevel").html(Math.round(portalGun.level));
+        $("#portalGunprice").html(Math.round(portalGun.price));
+        $("#portalGunearn").html(Math.round(portalGun.earnings));
+
+        // Jerry Smith
+        $("#jerrylevel").html(Math.round(jerry.level));
+        $("#jerryprice").html(Math.round(jerry.price));
+        $("#jerryearn").html(Math.round(jerry.earnings));
+
+        // Beth Smith
+        $("#bethlevel").html(Math.round(beth.level));
+        $("#bethprice").html(Math.round(beth.price));
+        $("#bethearn").html(Math.round(beth.earnings));
+
+        // Summer Smith
+        $("#summerlevel").html(Math.round(summer.level));
+        $("#summerprice").html(Math.round(summer.price));
+        $("#summerearn").html(Math.round(summer.earnings));
+
+        // Morty Smith
+        $("#mortylevel").html(Math.round(morty.level));
+        $("#mortyprice").html(Math.round(morty.price));
+        $("#mortyearn").html(Math.round(morty.earnings));
+
+        // Rick Sanchez
+        $("#ricklevel").html(Math.round(rick.level));
+        $("#rickprice").html(Math.round(rick.price));
+        $("#rickearn").html(Math.round(rick.earnings));
+        
     }, 10);
 
-    $("#clickEvent").click(function () {
-        portalGun.click(user);
-    });
+    $("#clickEvent").click(() => portalGun.click(user));
+    $("#portalgun").click(() => portalGun.increaseLevel(user));
+    $("#jerry").click(() => { jerry.increaseLevel(user); jerry.startAutoclick(user); });
+    $("#beth").click(() => { beth.increaseLevel(user); beth.startAutoclick(user); });
+    $("#summer").click(() => { summer.increaseLevel(user); summer.startAutoclick(user); });
+    $("#morty").click(() => { morty.increaseLevel(user); morty.startAutoclick(user); });
+    $("#rick").click(() => { rick.increaseLevel(user); rick.startAutoclick(user); });
 
-    $("#portalgun").click(function(){ 
-        portalGun.increaseLevel(user);
-    });
-
-    $("#jerry").click(function(){ 
-        jerry.increaseLevel(user);
-    });
     
     
 </script>
