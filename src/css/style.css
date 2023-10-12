@@ -16,9 +16,36 @@ body {
     animation: rotate 20s linear infinite;
 }
 
-.money {
+.color {
     color: white;
 }
+
+.boxes {
+    display: flex;
+}
+
+.box-clicker {
+    width: 20%;
+    height: 80vh;
+    max-height: 80vh;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: scroll;
+    background-color: rgba(55, 50, 255, 60%);
+}
+
+.clicker {
+    width: 90%;
+    height: 20%;
+    border: 1px solid black;
+    background-color: burlywood;
+    margin: 10px;
+}
+
+
 
 @keyframes rotate {
     0% {

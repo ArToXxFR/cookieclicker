@@ -9,11 +9,11 @@ class User {
         this._money += setMoney*this._global_multiplier;
     }
 
-    set loseMoney(setMoney) {
+    set _loseMoney(setMoney) {
         this._money -= setMoney;
     }
 
-    get getMoney() {
+    get _getMoney() {
         return Math.round(this._money);
     }
 }

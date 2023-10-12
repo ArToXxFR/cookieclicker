@@ -9,52 +9,57 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
-    <div class="portal">
-        <img id="clickEvent" class="rocket" src="src/images/portal.png">
+    <div class="boxes">
+        <div class="portal">
+            <img id="clickEvent" class="rocket" src="src/images/portal.png">
+        </div>
+        <div id="money" class="color">0</div>
+        <div class="box-clicker">
+            <div class="color clicker">
+                <span>Portal Gun</span>
+                <span id="portalGunlevel">0</span>
+                <span id="portalGunprice">0</span>
+                <span id="portalGunearn">0</span>
+                <button id="portalgun">Augmenter de niveau Clicker</button>
+            </div>
+            <div class="color clicker">
+                <span>Jerry Smith</span>
+                <span id="jerrylevel">0</span>
+                <span id="jerryprice">0</span>
+                <span id="jerryearn">0</span>
+                <button id="jerry">Augmenter de niveau Clicker</button>
+            </div>
+            <div class="color clicker">
+                <span>Beth Smith</span>
+                <span id="bethlevel">0</span>
+                <span id="bethprice">0</span>
+                <span id="bethearn">0</span>
+                <button id="beth">Augmenter de niveau Clicker</button>
+            </div>
+            <div class="color clicker">
+                <span>Summer Smith</span>
+                <span id="summerlevel">0</span>
+                <span id="summerprice">0</span>
+                <span id="summerearn">0</span>
+                <button id="summer">Augmenter de niveau Clicker</button>
+            </div>
+            <div class="color clicker">
+                <span>Morty Smith</span>
+                <span id="mortylevel">0</span>
+                <span id="mortyprice">0</span>
+                <span id="mortyearn">0</span>
+                <button id="morty">Augmenter de niveau Clicker</button>
+            </div>
+            <div class="color clicker">
+                <span>Rick Sanchez</span>
+                <span id="ricklevel">0</span>
+                <span id="rickprice">0</span>
+                <span id="rickearn">0</span>
+                <button id="rick">Augmenter de niveau Clicker</button>
+            </div>
+        </div>
     </div>
-    <div id="money" class="money">0</div>
-    <div>
-        <span>Portal Gun</span>
-        <span id="portalGunlevel">0</span>
-        <span id="portalGunprice">0</span>
-        <span id="portalGunearn">0</span>
-        <button id="portalgun">Augmenter de niveau Clicker</button>
-    </div>
-    <div>
-        <span>Jerry Smith</span>
-        <span id="jerrylevel">0</span>
-        <span id="jerryprice">0</span>
-        <span id="jerryearn">0</span>
-        <button id="jerry">Augmenter de niveau Clicker</button>
-    </div>
-    <div>
-        <span>Beth Smith</span>
-        <span id="bethlevel">0</span>
-        <span id="bethprice">0</span>
-        <span id="bethearn">0</span>
-        <button id="beth">Augmenter de niveau Clicker</button>
-    </div>
-    <div>
-        <span>Summer Smith</span>
-        <span id="summerlevel">0</span>
-        <span id="summerprice">0</span>
-        <span id="summerearn">0</span>
-        <button id="summer">Augmenter de niveau Clicker</button>
-    </div>
-    <div>
-        <span>Morty Smith</span>
-        <span id="mortylevel">0</span>
-        <span id="mortyprice">0</span>
-        <span id="mortyearn">0</span>
-        <button id="morty">Augmenter de niveau Clicker</button>
-    </div>
-    <div>
-        <span>Rick Sanchez</span>
-        <span id="ricklevel">0</span>
-        <span id="rickprice">0</span>
-        <span id="rickearn">0</span>
-        <button id="rick">Augmenter de niveau Clicker</button>
-    </div>
+
 </body>
 <script>
     const user = new User("Alfred")
