@@ -9,105 +9,135 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 </head>
 <body>
+    <span id="event">
+    </span>
     <div class="boxes">
-        <div class="portal">
-            <img id="clickEvent" class="rocket" src="src/images/portal.png">
+        <div class="sections">
+            
         </div>
-        <div id="money" class="color">0</div>
-        <div class="box-clicker">
-            <div class="color clicker">
-                <span>Portal Gun</span>
-                <span id="portalGunlevel">0</span>
-                <span id="portalGunprice">0</span>
-                <span id="portalGunearn">0</span>
-                <button id="portalgun">Augmenter de niveau Clicker</button>
+        <div class="sections">
+            <div id="money" class="color">0</div>
+            <div class="div-portal">
+                <img id="clickEvent" class="portal" src="src/images/portal.png">
             </div>
-            <div class="color clicker">
-                <span>Jerry Smith</span>
-                <span id="jerrylevel">0</span>
-                <span id="jerryprice">0</span>
-                <span id="jerryearn">0</span>
-                <button id="jerry">Augmenter de niveau Clicker</button>
-            </div>
-            <div class="color clicker">
-                <span>Beth Smith</span>
-                <span id="bethlevel">0</span>
-                <span id="bethprice">0</span>
-                <span id="bethearn">0</span>
-                <button id="beth">Augmenter de niveau Clicker</button>
-            </div>
-            <div class="color clicker">
-                <span>Summer Smith</span>
-                <span id="summerlevel">0</span>
-                <span id="summerprice">0</span>
-                <span id="summerearn">0</span>
-                <button id="summer">Augmenter de niveau Clicker</button>
-            </div>
-            <div class="color clicker">
-                <span>Morty Smith</span>
-                <span id="mortylevel">0</span>
-                <span id="mortyprice">0</span>
-                <span id="mortyearn">0</span>
-                <button id="morty">Augmenter de niveau Clicker</button>
-            </div>
-            <div class="color clicker">
-                <span>Rick Sanchez</span>
-                <span id="ricklevel">0</span>
-                <span id="rickprice">0</span>
-                <span id="rickearn">0</span>
-                <button id="rick">Augmenter de niveau Clicker</button>
+        </div>
+        <div class="sections">
+            <h2 class="market-title">Market Dimensionnel</h2>
+            <div class="box-clicker" id="box-clicker">
+                
             </div>
         </div>
     </div>
-
 </body>
 <script>
-    const user = new User("Alfred")
-    const portalGun = new Clicker("Pisto-Portail", 5, 1, false);
-    const jerry = new Jerry("Jerry Smith", 30, 2, true);  
-    const beth = new Beth("Beth Smith", 150, 8, true);  
-    const summer = new Clicker("Summer Smith", 1000, 15, true);  
-    const morty = new Clicker("Morty Smith", 5000, 30, true);  
-    const rick = new Clicker("Rick Sanchez", 25000, 80, true);  
+    const user = new User("Alfred");
+    const portalGun = new PortalGun("Pisto-Portail", "portalgun", 5, 1, false);
+    const jerry = new Jerry("Jerry Smith", "jerry", 30, 2, true);  
+    const beth = new Beth("Beth Smith", "beth", 150, 8, true);  
+    const summer = new Summer("Summer Smith", "summer", 1000, 15, true);  
+    const morty = new Morty("Morty Smith", "morty",5000, 30, true);  
+    const rick = new Rick("Rick Sanchez", "rick",25000, 80, true);
+
+    const heroes = [
+        portalGun,
+        jerry,
+        beth,
+        summer,
+        morty,
+        rick
+    ];
+
+    for (const hero of heroes) {
+        let divclicker = document.createElement('div');
+        divclicker.className = "color clicker";
+
+        let divitems = document.createElement("div");
+        divitems.className = "div-items";
+
+        let divitems_first_part = document.createElement("div");
+        divitems_first_part.className = "divitems-first-part";
+
+        let divitems_second_part = document.createElement("div");
+        divitems_second_part.className = "divitems-second-part";
+
+        let name = document.createElement("span");
+        name.innerHTML = hero.name;
+        name.className = "items-name";
+
+        let level = document.createElement("span");
+        level.id = hero+"level";
+        level.className = "level"
+
+        let price = document.createElement("span");
+        price.id = hero+"price";
+
+        let earn = document.createElement("span");
+        earn.id = hero+"earn";
+        earn.className = "earn"
+
+        let button = document.createElement("button");
+        button.id = hero;
+        button.innerHTML = "Améliorer ↑";
+        button.className = "button"
+
+        let bonuses = document.createElement("div");
+        bonuses.className = "bonus-box"
+
+        let firstBonus = document.createElement("span");
+        firstBonus.className = "bonus"
+        firstBonus.id = hero + "firstbonus"
+
+        let secondBonus = document.createElement("span");
+        secondBonus.className = "bonus"
+        secondBonus.id = hero + "secondbonus"
+
+        let thirdBonus = document.createElement("span");
+        thirdBonus.className = "bonus"
+        thirdBonus.id = hero + "thirdbonus"
+
+        let divimage = document.createElement("div");
+        divimage.className = "size-item-image";
+        let image = document.createElement("img");
+        image.src = hero.image;
+        image.className = "items-img";
+
+        bonuses.appendChild(firstBonus);
+        bonuses.appendChild(secondBonus);
+        bonuses.appendChild(thirdBonus);
+
+        divimage.appendChild(image);
+
+        divitems_first_part.appendChild(name);
+        divitems_first_part.appendChild(bonuses);
+        divitems_first_part.appendChild(earn);
+
+        divitems_second_part.appendChild(level);
+        button.appendChild(price);
+        divitems_second_part.appendChild(button);
+
+        divitems.appendChild(divitems_first_part);
+        divitems.appendChild(divitems_second_part);
+
+        divclicker.appendChild(divimage);
+        divclicker.appendChild(divitems);
+
+        $("#box-clicker").append(divclicker);
+    }
 
     setInterval(() => {
 
         // Actualiser l'argent
         $("#money").html(user.getMoney);
 
-        // Portal Gun
-        $("#portalGunlevel").html(Math.round(portalGun.level));
-        $("#portalGunprice").html(Math.round(portalGun.price));
-        $("#portalGunearn").html(Math.round(portalGun.earnings));
-
-        // Jerry Smith
-        $("#jerrylevel").html(Math.round(jerry.level));
-        $("#jerryprice").html(Math.round(jerry.price));
-        $("#jerryearn").html(Math.round(jerry.earnings));
-
-        // Beth Smith
-        $("#bethlevel").html(Math.round(beth.level));
-        $("#bethprice").html(Math.round(beth.price));
-        $("#bethearn").html(Math.round(beth.earnings));
-
-        // Summer Smith
-        $("#summerlevel").html(Math.round(summer.level));
-        $("#summerprice").html(Math.round(summer.price));
-        $("#summerearn").html(Math.round(summer.earnings));
-
-        // Morty Smith
-        $("#mortylevel").html(Math.round(morty.level));
-        $("#mortyprice").html(Math.round(morty.price));
-        $("#mortyearn").html(Math.round(morty.earnings));
-
-        // Rick Sanchez
-        $("#ricklevel").html(Math.round(rick.level));
-        $("#rickprice").html(Math.round(rick.price));
-        $("#rickearn").html(Math.round(rick.earnings));
-        
+        for (const hero of heroes) {
+            $("#"+ hero +"level").html("Niveau : " + Math.round(hero.level));
+            $("#" + hero + "price").html(Math.round(hero.price));
+            $("#" + hero + "earn").html("Revenus : " + Math.round(hero.earnings / (hero.timing_autoclick / 1000)));
+        }
     }, 10);
 
     $("#clickEvent").click(() => portalGun.click(user));
+
     $("#portalgun").click(() => portalGun.increaseLevel(user));
     $("#jerry").click(() => { jerry.increaseLevel(user); jerry.startAutoclick(user); });
     $("#beth").click(() => { beth.increaseLevel(user); beth.startAutoclick(user); });
@@ -115,7 +145,15 @@
     $("#morty").click(() => { morty.increaseLevel(user); morty.startAutoclick(user); });
     $("#rick").click(() => { rick.increaseLevel(user); rick.startAutoclick(user); });
 
+    for (hero of heroes) {
+        $("#" + hero + "firstbonus").click(() => { hero.first_bonus(user) });
+        $("#" + hero + "secondbonus").click(() => { hero.second_bonus(user) });
+        $("#" + hero + "thirdbonus").click(() => { hero.third_bonus(user) });
+    }
     
+
+    Event.mr_larbin();
+
     
 </script>
 </html>
