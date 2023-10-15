@@ -84,17 +84,17 @@ class PortalGun extends Clicker {
     constructor(name, uid, price, earnings, isAutoclicker) {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/portal_gun.png";
-        this._first_bonus_array = {
+        this.first_bonus_array = {
             "name" : "Trusted Helmet",
             "description" : "...",
             "price": 100,
         };
-        this._second_bonus_array = {
+        this.second_bonus_array = {
             "name" : "Magnetic Umbrella",
             "description" : "...",
             "price" : 300
         };
-        this._third_bonus_array = {
+        this.third_bonus_array = {
             "name" : "Lucky Manual",
             "description" : "...",
             "price" : 800
@@ -103,25 +103,25 @@ class PortalGun extends Clicker {
 
     // Increase the trust of Jerry
     first_bonus(userInstance) {
-        if (this._first_bonus_array.price <= userInstance.getMoney){
+        if (this.first_bonus_array.price <= userInstance.getMoney){
             this._timing_autoclick -= 20;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Jerry attracts all good things to him
     second_bonus(userInstance) {
-        if (this._second_bonus_array.price <= userInstance.getMoney){
+        if (this.second_bonus_array.price <= userInstance.getMoney){
             this._earnings += 0.25;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Increase the global earning by 5%
     third_bonus(userInstance) {
-        if (this._third_bonus_array.price <= userInstance.getMoney){
+        if (this.third_bonus_array.price <= userInstance.getMoney){
             userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 }
@@ -130,17 +130,17 @@ class Jerry extends Clicker {
     constructor(name, uid, price, earnings, isAutoclicker) {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/jerry.png";
-        this._first_bonus_array = {
+        this.first_bonus_array = {
             "name" : "Trusted Helmet",
             "description" : "...",
             "price": 100,
         };
-        this._second_bonus_array = {
+        this.second_bonus_array = {
             "name" : "Magnetic Umbrella",
             "description" : "...",
             "price" : 300
         };
-        this._third_bonus_array = {
+        this.third_bonus_array = {
             "name" : "Lucky Manual",
             "description" : "...",
             "price" : 800
@@ -149,26 +149,25 @@ class Jerry extends Clicker {
 
     // Increase the trust of Jerry
     first_bonus(userInstance) {
-        if (this._first_bonus_array.price <= userInstance.getMoney){
+        if (this.first_bonus_array.price <= userInstance.getMoney){
             this._timing_autoclick -= 20;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Jerry attracts all good things to him
     second_bonus(userInstance) {
-        console.log(this._second_bonus_array.price);
-        if (this._second_bonus_array.price <= userInstance.getMoney){
+        if (this.second_bonus_array.price <= userInstance.getMoney){
             this._earnings += 0.25;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Increase the global earning by 5%
     third_bonus(userInstance) {
-        if (this._third_bonus_array.price <= userInstance.getMoney){
+        if (this.third_bonus_array.price <= userInstance.getMoney){
             userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 }
@@ -177,17 +176,17 @@ class Beth extends Clicker {
     constructor(name, uid, price, earnings, isAutoclicker) {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/beth.png";
-        this._first_bonus_array = {
+        this.first_bonus_array = {
             "name" : "Intergalatic Gloves",
             "description" : "...",
             "price" : 1000
     };
-        this._second_bonus_array = {
+        this.second_bonus_array = {
             "name" : "Microverse Battery",
             "description" : "...",
             "price" : 1000
         };
-        this._third_bonus_array = {
+        this.third_bonus_array = {
             "name" : "Communication Ring",
             "description" : "...",
             "price" : 1000
@@ -196,25 +195,25 @@ class Beth extends Clicker {
 
     // Beth is more precise on each shot 
     first_bonus(userInstance) {
-        if (this._first_bonus_array.price <= userInstance.getMoney){
+        if (this.first_bonus_array.price <= userInstance.getMoney){
             this._timing_autoclick -= 40;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Beth contains a universe in a universe in one box
     second_bonus(userInstance) {
-        if (this._second_bonus_array.price <= userInstance.getMoney){
+        if (this.second_bonus_array.price <= userInstance.getMoney){
             this._earnings += 0.25;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Beth is able keep contact with everyone
     third_bonus(userInstance) {
-        if (this._third_bonus_array.price <= userInstance.getMoney){
+        if (this.third_bonus_array.price <= userInstance.getMoney){
             userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 }
@@ -223,17 +222,17 @@ class Summer extends Clicker {
     constructor(name, uid, price, earnings, isAutoclicker) {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/summer.webp";
-        this._first_bonus_array = {
+        this.first_bonus_array = {
             "name" : "Trusted Helmet",
             "description" : "...",
             "price": 100,
         };
-        this._second_bonus_array = {
+        this.second_bonus_array = {
             "name" : "Magnetic Umbrella",
             "description" : "...",
             "price" : 300
         };
-        this._third_bonus_array = {
+        this.third_bonus_array = {
             "name" : "Lucky Manual",
             "description" : "...",
             "price" : 800
@@ -242,25 +241,25 @@ class Summer extends Clicker {
 
    // Increase the trust of Jerry
    first_bonus(userInstance) {
-        if (this._first_bonus_array.price <= userInstance.getMoney){
+        if (this.first_bonus_array.price <= userInstance.getMoney){
             this._timing_autoclick -= 20;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Jerry attracts all good things to him
     second_bonus(userInstance) {
-        if (this._second_bonus_array.price <= userInstance.getMoney){
+        if (this.second_bonus_array.price <= userInstance.getMoney){
             this._earnings += 0.25;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Increase the global earning by 5%
     third_bonus(userInstance) {
-        if (this._third_bonus_array.price <= userInstance.getMoney){
+        if (this.third_bonus_array.price <= userInstance.getMoney){
             userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 }
@@ -269,17 +268,17 @@ class Morty extends Clicker {
     constructor(name, uid, price, earnings, isAutoclicker) {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/morty.png";
-        this._first_bonus_array = {
+        this.first_bonus_array = {
             "name" : "Trusted Helmet",
             "description" : "...",
             "price": 100,
         };
-        this._second_bonus_array = {
+        this.second_bonus_array = {
             "name" : "Magnetic Umbrella",
             "description" : "...",
             "price" : 300
         };
-        this._third_bonus_array = {
+        this.third_bonus_array = {
             "name" : "Lucky Manual",
             "description" : "...",
             "price" : 800
@@ -288,25 +287,25 @@ class Morty extends Clicker {
 
     // Increase the trust of Jerry
     first_bonus(userInstance) {
-        if (this._first_bonus_array.price <= userInstance.getMoney){
+        if (this.first_bonus_array.price <= userInstance.getMoney){
             this._timing_autoclick -= 20;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Jerry attracts all good things to him
     second_bonus(userInstance) {
-        if (this._second_bonus_array.price <= userInstance.getMoney){
+        if (this.second_bonus_array.price <= userInstance.getMoney){
             this._earnings += 0.25;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Increase the global earning by 5%
     third_bonus(userInstance) {
-        if (this._third_bonus_array.price <= userInstance.getMoney){
+        if (this.third_bonus_array.price <= userInstance.getMoney){
             userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 }
@@ -315,17 +314,17 @@ class Rick extends Clicker {
     constructor(name, uid, price, earnings, isAutoclicker) {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/rick.png";
-        this._first_bonus_array = {
+        this.first_bonus_array = {
             "name" : "Trusted Helmet",
             "description" : "...",
             "price": 100,
         };
-        this._second_bonus_array = {
+        this.second_bonus_array = {
             "name" : "Magnetic Umbrella",
             "description" : "...",
             "price" : 300
         };
-        this._third_bonus_array = {
+        this.third_bonus_array = {
             "name" : "Lucky Manual",
             "description" : "...",
             "price" : 800
@@ -334,41 +333,56 @@ class Rick extends Clicker {
 
     // Increase the trust of Jerry
     first_bonus(userInstance) {
-        if (this._first_bonus_array.price <= userInstance.getMoney){
+        if (this.first_bonus_array.price <= userInstance.getMoney){
             this._timing_autoclick -= 20;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Jerry attracts all good things to him
     second_bonus(userInstance) {
-        if (this._second_bonus_array.price <= userInstance.getMoney){
+        if (this.second_bonus_array.price <= userInstance.getMoney){
             this._earnings += 0.25;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
     // Increase the global earning by 5%
     third_bonus(userInstance) {
-        if (this._third_bonus_array.price <= userInstance.getMoney){
+        if (this.third_bonus_array.price <= userInstance.getMoney){
             userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this._first_bonus_array.price;
+            userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 }
 
 class Event {
-    static mr_larbin() {
+    static mr_larbin(userInstance) {
         const body = document.body;
-        body.style.backgroundImage = 'url("src/images/dimension_35C.webp")';
         
         let nb_images = 0;
         let interval = 1000;
         const max_images = 30;
         let id = 0;
 
+        let isClicked = false;
+
+        const image = document.createElement("img");
+        image.src = "src/images/mr_larbin.png";
+        image.className = "mr-larbin";
+        image.id = "event"+id;
+        image.addEventListener("mouseenter", () => {
+            image.style.cursor = "pointer";
+        });
+        id++;
+        
+        image.style.left = Math.random() * window.outerWidth + "px";
+        image.style.top = Math.random() * window.outerHeight + "px";
+        
+        document.querySelector("#event").appendChild(image);
+
         const createImage = (nb_images) => {
-            if (nb_images < max_images) {
+            if (nb_images <= max_images) {
                 const image = document.createElement("img");
                 image.src = "src/images/mr_larbin.png";
                 image.className = "mr-larbin";
@@ -380,6 +394,8 @@ class Event {
                 document.querySelector("#event").appendChild(image);
 
                 const audio = new Audio('src/audio/mr_larbin.mp3');
+
+                userInstance.earnMoney = userInstance._money * 0.04;
                 
                 audio.play();
 
@@ -390,7 +406,7 @@ class Event {
                     createImage(nb_images+1);
                 }, interval);
             } else {
-                for(let i = 0; i < max_images; i++){
+                for(let i = 0; i <= max_images; i++){
                     let image = document.querySelector("#event"+i);
                     image.remove();
                     body.style.backgroundImage = 'url("src/images/fond.jpg")';
@@ -398,6 +414,15 @@ class Event {
             }
         }
 
-        createImage(nb_images);
+        $("#event0").click(() => {
+            body.style.backgroundImage = 'url("src/images/dimension_35C.webp")';
+            createImage(nb_images);
+            isClicked = true;
+        });
+        setInterval(() => {
+            if(isClicked == false) {
+                $("#event0").remove();
+            }
+        }, 30000);
     }
 }

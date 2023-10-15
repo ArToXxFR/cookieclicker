@@ -25,13 +25,12 @@ body {
 /* Portail */
 
 .div-portal {
-    width: 20%;
+    width: 80%;
     user-select: none;
 }
 
 .portal {
     animation: rotate 20s linear infinite;
-
 }
 
 .color {
@@ -43,6 +42,8 @@ body {
 .market-title {
     height: 20%;
     margin: 0;
+    position: relative;
+    top: 8%;
     text-align: center;
     font-family: "rickandmorty", Arial, Helvetica, sans-serif;
     color: white;
@@ -90,6 +91,16 @@ body {
 .items-img {
     max-width: 90%;
     height: 100%;
+}
+
+.currency::after {
+    content: "";
+    display: inline-block;
+    background-image: url(../images/money.png);
+    position: relative;
+    left: 2px;
+    width: 15px;
+    height: 15px;
 }
 
 .bonus-box {
@@ -173,6 +184,7 @@ body {
     position: fixed;
     width: 100px;
     height: 100px;
+    z-index: 1;
 }
 
 

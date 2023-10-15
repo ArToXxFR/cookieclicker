@@ -16,7 +16,7 @@
             
         </div>
         <div class="sections">
-            <div id="money" class="color">0</div>
+            <div id="money" class="color currency">0</div>
             <div class="div-portal">
                 <img id="clickEvent" class="portal" src="src/images/portal.png">
             </div>
@@ -73,7 +73,7 @@
 
         let earn = document.createElement("span");
         earn.id = hero+"earn";
-        earn.className = "earn"
+        earn.className = "earn currency"
 
         let button = document.createElement("button");
         button.id = hero;
@@ -151,9 +151,13 @@
         $("#" + hero + "thirdbonus").click(() => { hero.third_bonus(user) });
     }
     
+    setInterval(() => {
+        const random = Math.floor(Math.random() * 100);
+        switch(random) {
+            case 1:
+                Event.mr_larbin(user);
+        }
+    }, 60000);
 
-    Event.mr_larbin();
-
-    
 </script>
 </html>
