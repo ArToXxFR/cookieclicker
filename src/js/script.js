@@ -3,14 +3,38 @@ class User {
         this._money = 0;
         this._name = name;
         this._global_multiplier = 1;
+        this._total_click = 0;
+        this._total_events = 0;
+        this._total_money = 0;
     }
 
     set earnMoney(setMoney) {
         this._money += setMoney*this._global_multiplier;
+        this._total_money += setMoney*this._global_multiplier;
     }
 
     set loseMoney(setMoney) {
         this._money -= setMoney;
+    }
+
+    addClick() {
+        this._total_click += 1;
+    }
+
+    addEvent() {
+        this._total_events += 1;
+    }
+
+    get getClick() {
+        return this._total_click;
+    }
+
+    get getEvent() {
+        return this._total_events;
+    }
+
+    get getTotalMoney() {
+        return Math.round(this._total_money);
     }
 
     get getMoney() {
@@ -358,6 +382,7 @@ class Rick extends Clicker {
 
 class Event {
     static mr_larbin(userInstance) {
+
         const body = document.body;
         
         let nb_images = 0;
@@ -382,6 +407,7 @@ class Event {
         document.querySelector("#event").appendChild(image);
 
         const createImage = (nb_images) => {
+            userInstance.addEvent();
             if (nb_images <= max_images) {
                 const image = document.createElement("img");
                 image.src = "src/images/mr_larbin.png";

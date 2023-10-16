@@ -13,20 +13,23 @@
     </span>
     <div class="boxes">
         <div class="sections">
-            
+            <h2 class="title">Statistiques</h2>
+            <div class="box-clicker">
+                <div class="stats">Revenus totaux : <span id="totalmoney" ></span></div>
+                <div class="stats">Clicks totaux : <span id="totalclicks" ></span></div>
+                <div class="stats">Events totaux : <span id="totalevents" ></span></div>
+
+            </div>
         </div>
         <div class="sections">
             <h1 class="title">Rick and Morty Clicker</h1>
             <div class="title-box">
                 <h2 class="title">Credits Interdimensionnels</h2>
                 <div id="money" class="color currency">0</div>
-                
             </div>
             <div class="div-portal">
-                <img id="clickEvent" class="" src="src/images/portal.gif">
+                <img id="clickEvent" class="portal" src="src/images/portal.gif">
             </div>
-            
-            
         </div>
         <div class="sections">
             <h2 class="title">Market Dimensionnel</h2>
@@ -141,9 +144,15 @@
             $("#" + hero + "price").html(Math.round(hero.price));
             $("#" + hero + "earn").html("Revenus : " + Math.round(hero.earnings / (hero.timing_autoclick / 1000)));
         }
+
+        $("#totalmoney").html(user.getTotalMoney);
+        $("#totalclicks").html(user.getClick);
+        $("#totalevents").html(user.getEvent);
+
+
     }, 10);
 
-    $("#clickEvent").click(() => portalGun.click(user));
+    $("#clickEvent").click(() => { portalGun.click(user); user.addClick(); });
 
     $("#portalgun").click(() => portalGun.increaseLevel(user));
     $("#jerry").click(() => { jerry.increaseLevel(user); jerry.startAutoclick(user); });
@@ -157,14 +166,15 @@
         $("#" + hero + "secondbonus").click(() => { hero.second_bonus(user) });
         $("#" + hero + "thirdbonus").click(() => { hero.third_bonus(user) });
     }
+
     
     setInterval(() => {
-        const random = Math.floor(Math.random() * 100);
+        const random = Math.floor(Math.random() * 50);
         switch(random) {
             case 1:
                 Event.mr_larbin(user);
         }
-    }, 60000);
+    }, 20000);
 
 </script>
 </html>
