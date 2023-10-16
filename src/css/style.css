@@ -18,19 +18,48 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
+/* Titres */ 
 
+.title-box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    height: 20%;
+    margin: 0;
+    position: relative;
+    top: 8%;
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    font-family: "rickandmorty", Arial, Helvetica, sans-serif;
+    font-size: 3em;
+}
+
+h2 {
+    font-size: xx-large;
+}
 
 /* Portail */
 
 .div-portal {
     width: 80%;
     user-select: none;
+    position: relative;
 }
 
 .portal {
     animation: rotate 20s linear infinite;
+    transform-origin: center;
 }
 
 .color {
@@ -38,17 +67,6 @@ body {
 }
 
 /* Section de droite (le marché) */
-
-.market-title {
-    height: 20%;
-    margin: 0;
-    position: relative;
-    top: 8%;
-    text-align: center;
-    font-family: "rickandmorty", Arial, Helvetica, sans-serif;
-    color: white;
-    font-size: xx-large;
-}
 
 .box-clicker {
     height: 80%;
