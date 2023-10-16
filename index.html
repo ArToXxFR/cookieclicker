@@ -90,20 +90,71 @@
         button.innerHTML = "Améliorer ↑";
         button.className = "button"
 
+
+        let tooltip1 = document.createElement("div");
+        tooltip1.className = "tooltip";
+
+        let tooltip2 = document.createElement("div");
+        tooltip2.className = "tooltip";
+
+        let tooltip3 = document.createElement("div");
+        tooltip3.className = "tooltip";
+
         let bonuses = document.createElement("div");
         bonuses.className = "bonus-box"
 
         let firstBonus = document.createElement("span");
+        firstBonus.innerHTML = "<div class='inside-bonus'>1</div>"
         firstBonus.className = "bonus"
         firstBonus.id = hero + "firstbonus"
 
+        firstBonus.appendChild(tooltip1);
+
+        let firstBonusPrice = document.createElement("div");
+        firstBonusPrice.className = "bonus-price currency";
+        firstBonusPrice.innerHTML = hero.first_bonus_array.price;
+        tooltip1.appendChild(firstBonusPrice);
+
+        let firstBonusDesc = document.createElement("span");
+        firstBonusDesc.className = "bonus-description";
+        firstBonusDesc.innerHTML = hero.first_bonus_array.description;
+        tooltip1.appendChild(firstBonusDesc);
+
         let secondBonus = document.createElement("span");
+        secondBonus.innerHTML = "<div class='inside-bonus'>2</div>"
         secondBonus.className = "bonus"
         secondBonus.id = hero + "secondbonus"
 
+        secondBonus.appendChild(tooltip2);
+
+        let secondBonusPrice = document.createElement("div");
+        secondBonusPrice.className = "bonus-price currency";
+        secondBonusPrice.innerHTML = hero.second_bonus_array.price;
+        tooltip2.appendChild(secondBonusPrice);
+
+        let secondBonusDesc = document.createElement("span");
+        secondBonusDesc.className = "bonus-description";
+        secondBonusDesc.innerHTML = hero.second_bonus_array.description;
+        tooltip2.appendChild(secondBonusDesc);
+
         let thirdBonus = document.createElement("span");
+        thirdBonus.innerHTML = "<div class='inside-bonus'>3</div>"
         thirdBonus.className = "bonus"
         thirdBonus.id = hero + "thirdbonus"
+
+        thirdBonus.appendChild(tooltip3);
+
+        let thirdBonusPrice = document.createElement("div");
+        thirdBonusPrice.className = "bonus-price currency";
+        thirdBonusPrice.innerHTML = hero.third_bonus_array.price;
+        tooltip3.appendChild(thirdBonusPrice);
+
+        let thirdBonusDesc = document.createElement("span");
+        thirdBonusDesc.className = "bonus-description";
+        thirdBonusDesc.innerHTML = hero.third_bonus_array.description;
+        tooltip3.appendChild(thirdBonusDesc);
+
+
 
         let divimage = document.createElement("div");
         divimage.className = "size-item-image";

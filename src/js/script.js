@@ -110,7 +110,7 @@ class PortalGun extends Clicker {
         this._path_image = "src/images/portal_gun.png";
         this.first_bonus_array = {
             "name" : "Trusted Helmet",
-            "description" : "...",
+            "description" : "Le trusted helmet permet de...",
             "price": 100,
         };
         this.second_bonus_array = {

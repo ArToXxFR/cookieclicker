@@ -203,6 +203,61 @@ h2 {
     font-weight: bold;
 }
 
+/* Bonus */
+.bonus {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  background-color: rgba(100, 100, 100, 0.5);
+  justify-content: center;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.bonus-title,
+.bonus-description,
+.bonus-price {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  z-index: 1;
+  width: 150px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.bonus-price {
+  top: 0;
+}
+
+.bonus-description {
+  bottom: 0;
+}
+
+.bonus:hover .bonus-title,
+.bonus:hover .bonus-description,
+.bonus:hover .bonus-price {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.inside-bonus {
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+    color:#14ACC9;
+    -webkit-text-stroke: 1px #DAE14D;
+}
+
 /* Evenements aléatoires */
 
 .mr-larbin {
