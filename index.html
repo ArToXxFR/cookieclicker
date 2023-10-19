@@ -11,14 +11,20 @@
 <body>
     <span id="event">
     </span>
+    <div id="importForm" class="importForm">
+        <textarea id="importTextarea" class="importTextarea" placeholder="Placez le contenu de votre sauvegarde ici"></textarea>
+        <button id="importButton">Envoyer</button>
+        <span class="closeButton" id="closeButton">Fermer</span>
+    </div>
     <div class="boxes">
         <div class="sections">
             <h2 class="title">Statistiques</h2>
             <div class="box-clicker">
                 <div class="stats">Revenus totaux : <span id="totalmoney" ></span></div>
                 <div class="stats">Clicks totaux : <span id="totalclicks" ></span></div>
-                <div class="stats">Events totaux : <span id="totalevents" ></span></div>
-
+                <div class="stats">Events totaux apparus: <span id="totalevents" ></span></div>
+                <div class="stats">Events utilisés : <span id="totaleventsclicked" ></span></div>
+                <div class="stats">Multiplier total : <span id="multiplier" ></span></div>
             </div>
         </div>
         <div class="sections">
@@ -29,6 +35,10 @@
             </div>
             <div class="div-portal">
                 <img id="clickEvent" class="portal" src="src/images/portal.gif">
+            </div>
+            <div class="json">
+                <a class="json-button" id="exportJSON">Exporter la sauvegarde</a>
+                <a class="json-button" id="importJSON">Importer une sauvegarde</a>
             </div>
         </div>
         <div class="sections">
@@ -106,10 +116,7 @@
         let firstBonus = document.createElement("span");
         firstBonus.innerHTML = "<div class='inside-bonus'>1</div>"
         firstBonus.className = "bonus"
-        firstBonus.id = hero + "firstbonus"
-
-        firstBonus.appendChild(tooltip1);
-
+        firstBonus.id = hero + "firstbonus";
         let firstBonusPrice = document.createElement("div");
         firstBonusPrice.className = "bonus-price currency";
         firstBonusPrice.innerHTML = hero.first_bonus_array.price;
@@ -121,9 +128,9 @@
         tooltip1.appendChild(firstBonusDesc);
 
         let secondBonus = document.createElement("span");
-        secondBonus.innerHTML = "<div class='inside-bonus'>2</div>"
-        secondBonus.className = "bonus"
-        secondBonus.id = hero + "secondbonus"
+        secondBonus.innerHTML = "<div class='inside-bonus'>2</div>";
+        secondBonus.className = "bonus";
+        secondBonus.id = hero + "secondbonus";
 
         secondBonus.appendChild(tooltip2);
 
@@ -199,7 +206,8 @@
         $("#totalmoney").html(user.getTotalMoney);
         $("#totalclicks").html(user.getClick);
         $("#totalevents").html(user.getEvent);
-
+        $("#totaleventsclicked").html(user.getEventClicked);
+        $("#multiplier").html(user.getMultiplier);
 
     }, 10);
 
@@ -212,11 +220,35 @@
     $("#morty").click(() => { morty.increaseLevel(user); morty.startAutoclick(user); });
     $("#rick").click(() => { rick.increaseLevel(user); rick.startAutoclick(user); });
 
-    for (hero of heroes) {
-        $("#" + hero + "firstbonus").click(() => { hero.first_bonus(user) });
-        $("#" + hero + "secondbonus").click(() => { hero.second_bonus(user) });
-        $("#" + hero + "thirdbonus").click(() => { hero.third_bonus(user) });
-    }
+    // Bonus PortalGun
+    $("#portalgunfirstbonus").click(() => { portalGun.first_bonus(user) });
+    $("#portalgunsecondbonus").click(() => { portalGun.second_bonus(user) });
+    $("#portalgunthirdbonus").click(() => { portalGun.third_bonus(user) });
+
+    // Bonus Jerry
+    $("#jerryfirstbonus").click(() => { jerry.first_bonus(user) });
+    $("#jerrysecondbonus").click(() => { jerry.second_bonus(user) });
+    $("#jerrythirdbonus").click(() => { jerry.third_bonus(user) });
+
+    // Bonus Beth
+    $("#bethfirstbonus").click(() => { beth.first_bonus(user) });
+    $("#bethsecondbonus").click(() => { beth.second_bonus(user) });
+    $("#beththirdbonus").click(() => { beth.third_bonus(user) });
+
+    // Bonus Summer
+    $("#summerfirstbonus").click(() => { summer.first_bonus(user) });
+    $("#summerecondbonus").click(() => { summer.second_bonus(user) });
+    $("#summerthirdbonus").click(() => { summer.third_bonus(user) });
+
+    // Bonus Morty
+    $("#mortyfirstbonus").click(() => { morty.first_bonus(user) });
+    $("#mortysecondbonus").click(() => { morty.second_bonus(user) });
+    $("#mortythirdbonus").click(() => { morty.third_bonus(user) });
+
+    // Bonus Rick
+    $("#rickfirstbonus").click(() => { rick.first_bonus(user) });
+    $("#ricksecondbonus").click(() => { rick.second_bonus(user) });
+    $("#rickthirdbonus").click(() => { rick.third_bonus(user) });
 
     
     setInterval(() => {
@@ -224,8 +256,50 @@
         switch(random) {
             case 1:
                 Event.mr_larbin(user);
+            case 2:
+                Event.wayne(user);
         }
     }, 20000);
 
+    let exportObject = {};
+
+    for (hero of heroes) {
+        const jsonhero = hero.exportJSON();
+        exportObject[hero] = jsonhero;
+    }
+
+    const jsonuser = user.exportJSON();
+    exportObject["user"] = jsonuser;
+
+    const fileJSON = JSON.stringify(exportObject);
+
+    const file = new Blob([fileJSON], { type: "application/json"});
+
+    let downloadJSON = URL.createObjectURL(file);
+
+    $("#exportJSON").attr('href', downloadJSON);
+    $("#exportJSON").attr('download', "rick-and-morty-clicker-save")
+
+    $("#importJSON").click(() => {
+        $("#importForm").css("display", "flex");
+    });
+
+    $("#closeButton").click(() => {
+        $("#importForm").css("display", "none");
+    });
+
+    $("#importButton").click(() => {
+        const content = $("#importTextarea").val();
+        const importObject = JSON.parse(content);
+        for (hero of heroes) {
+            const JSONparsed = JSON.parse(importObject[hero]);
+            hero.importJSON(JSONparsed);
+        }
+        user.importJSON(JSON.parse(importObject.user));
+        $("#importForm").css("display", "none");
+    });
+
+
+    
 </script>
 </html>

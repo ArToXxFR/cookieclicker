@@ -260,7 +260,7 @@ h2 {
 
 /* Evenements aléatoires */
 
-.mr-larbin {
+.event {
     position: fixed;
     width: 100px;
     height: 100px;
@@ -271,6 +271,63 @@ h2 {
 
 .stats {
     width: 90%;
+    color: #14ACC9;
+    font-weight: bold;
+}
+
+/* Import / Export JSON */
+
+.json {
+    position: absolute;
+    bottom: 2%;
+}
+
+.json-button {
+    color: #14ACC9;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 5px;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.importForm {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 25%;
+    height: 70%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: wheat;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+
+.importTextarea {
+    resize: none;
+    width: 90%;
+    height: 70%;
+    margin: 10px;
+    opacity: 0.9;
+}
+
+.closeButton {
+    background-color: rgb(209, 68, 96);
+    padding: 3px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 
@@ -294,7 +351,7 @@ h2 {
     src: url("../fonts/get_schwifty.ttf");
 }
 
-@media (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
     .boxes {
         flex-direction: column;
     }

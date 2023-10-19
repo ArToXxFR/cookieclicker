@@ -5,7 +5,33 @@ class User {
         this._global_multiplier = 1;
         this._total_click = 0;
         this._total_events = 0;
+        this._total_events_clicked = 0;
         this._total_money = 0;
+    }
+
+    exportJSON() {
+
+        const jsonuser = {}
+
+        jsonuser["money"] = this._money;
+        jsonuser["name"] = this._name;
+        jsonuser["global_multiplier"] = this._global_multiplier;
+        jsonuser["total_click"] = this._total_click;
+        jsonuser["total_events"] = this._total_events;
+        jsonuser["total_events_clicked"] = this._total_events_clicked;
+        jsonuser["total_money"] = this._total_money;
+        
+        return jsonuser;
+    }
+
+    importJSON(dataJSON) {
+        this._money = dataJSON.money;
+        this._name = dataJSON.name;
+        this._global_multiplier = dataJSON.global_multiplier;
+        this._total_click = dataJSON.total_click;
+        this._total_events = dataJSON.total_events;
+        this._total_events_clicked = dataJSON.total_events_clicked;
+        this._total_money = dataJSON.total_money;
     }
 
     set earnMoney(setMoney) {
@@ -17,6 +43,14 @@ class User {
         this._money -= setMoney;
     }
 
+    set addGlobalMultiplier(nb) {
+        this._global_multiplier += nb;
+    }
+
+    set loseGlobalMultiplier(nb) {
+        this._global_multiplier -= nb;
+    }
+
     addClick() {
         this._total_click += 1;
     }
@@ -25,8 +59,20 @@ class User {
         this._total_events += 1;
     }
 
+    addEventClicked() {
+        this._total_events_clicked += 1;
+    }
+
     get getClick() {
         return this._total_click;
+    }
+
+    get getMultiplier() {
+        return this._global_multiplier;
+    }
+
+    get getEventClicked() {
+        return this._total_events_clicked;
     }
 
     get getEvent() {
@@ -58,6 +104,27 @@ class Clicker {
         return this._uid.toString();
     }
 
+    exportJSON() {
+        const json = JSON.stringify({
+            name: this._name,
+            multiplier: this._multiplier,
+            price: this._price,
+            earnings: this._earnings,
+            level: this._level,
+            timing_autoclick: this._timing_autoclick,
+        });
+        return json;
+    }
+
+    importJSON(dataJSON) {
+        this._name = dataJSON.name;
+        this._multiplier = dataJSON.multiplier;
+        this._price = dataJSON.price;
+        this._earnings = dataJSON.earnings;
+        this._level = dataJSON.level;
+        this._timing_autoclick = dataJSON.timing_autoclick;
+    }
+
     increaseLevel(userInstance) {
         if (this._price <= userInstance.getMoney){
             this._multiplier *= 1.5;
@@ -76,7 +143,11 @@ class Clicker {
             setInterval(() => {
                 this.click(userInstance);
             }, this._timing_autoclick);
-        }
+    }}  
+
+
+    get earnings() {
+        return this._earnings * this._multiplier;
     }
 
     get level() {
@@ -85,10 +156,6 @@ class Clicker {
 
     get price() {
         return this._price;
-    }
-
-    get earnings() {
-        return this._earnings * this._multiplier;
     }
 
     get name() {
@@ -109,23 +176,19 @@ class PortalGun extends Clicker {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/portal_gun.png";
         this.first_bonus_array = {
-            "name" : "Trusted Helmet",
-            "description" : "Le trusted helmet permet de...",
+            "description" : "Réduction du temps entre chaque clicks.",
             "price": 100,
         };
         this.second_bonus_array = {
-            "name" : "Magnetic Umbrella",
-            "description" : "...",
+            "description" : "Amélioration des gains de 25% sur ce personnage.",
             "price" : 300
         };
         this.third_bonus_array = {
-            "name" : "Lucky Manual",
-            "description" : "...",
+            "description" : "Permet de multiplier ses gains totaux de 5%",
             "price" : 800
         };
     }
 
-    // Increase the trust of Jerry
     first_bonus(userInstance) {
         if (this.first_bonus_array.price <= userInstance.getMoney){
             this._timing_autoclick -= 20;
@@ -133,19 +196,17 @@ class PortalGun extends Clicker {
         }
     }
 
-    // Jerry attracts all good things to him
     second_bonus(userInstance) {
         if (this.second_bonus_array.price <= userInstance.getMoney){
             this._earnings += 0.25;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            userInstance.loseMoney = this.second_bonus_array.price;
         }
     }
 
-    // Increase the global earning by 5%
     third_bonus(userInstance) {
         if (this.third_bonus_array.price <= userInstance.getMoney){
-            userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            userInstance.addGlobalMultiplier = 0.05;
+            userInstance.loseMoney = this.third_bonus_array.price;
         }
     }
 }
@@ -155,43 +216,37 @@ class Jerry extends Clicker {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/jerry.png";
         this.first_bonus_array = {
-            "name" : "Trusted Helmet",
-            "description" : "...",
-            "price": 100,
+            "description" : "Amélioration des gains de 15% sur ce personnage.",
+            "price": 500,
         };
         this.second_bonus_array = {
-            "name" : "Magnetic Umbrella",
-            "description" : "...",
-            "price" : 300
-        };
-        this.third_bonus_array = {
-            "name" : "Lucky Manual",
-            "description" : "...",
+            "description" : "Réduction du temps entre chaque clique.",
             "price" : 800
         };
+        this.third_bonus_array = {
+            "description" : "Permet de multiplier ses gains totaux de 4%",
+            "price" : 1200
+        };
     }
 
-    // Increase the trust of Jerry
     first_bonus(userInstance) {
         if (this.first_bonus_array.price <= userInstance.getMoney){
-            this._timing_autoclick -= 20;
-            userInstance.loseMoney = this.first_bonus_array.price;
-        }
-    }
-
-    // Jerry attracts all good things to him
-    second_bonus(userInstance) {
-        if (this.second_bonus_array.price <= userInstance.getMoney){
             this._earnings += 0.25;
             userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
-    // Increase the global earning by 5%
+    second_bonus(userInstance) {
+        if (this.second_bonus_array.price <= userInstance.getMoney){
+            this._timing_autoclick -= 20;
+            userInstance.loseMoney = this.second_bonus_array.price;
+        }
+    }
+
     third_bonus(userInstance) {
         if (this.third_bonus_array.price <= userInstance.getMoney){
-            userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            userInstance.addGlobalMultiplier = 0.04;
+            userInstance.loseMoney = this.third_bonus_array.price;
         }
     }
 }
@@ -201,43 +256,37 @@ class Beth extends Clicker {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/beth.png";
         this.first_bonus_array = {
-            "name" : "Intergalatic Gloves",
-            "description" : "...",
+            "description" : "Permet de multiplier ses gains totaux de 6%",
             "price" : 1000
     };
         this.second_bonus_array = {
-            "name" : "Microverse Battery",
-            "description" : "...",
+            "description" : "Amélioration des gains de 20% sur ce personnage.",
             "price" : 1000
         };
         this.third_bonus_array = {
-            "name" : "Communication Ring",
-            "description" : "...",
+            "description" : "Réduction du temps entre chaque clique.",
             "price" : 1000
     };
     }
 
-    // Beth is more precise on each shot 
     first_bonus(userInstance) {
         if (this.first_bonus_array.price <= userInstance.getMoney){
-            this._timing_autoclick -= 40;
+            userInstance.addGlobalMultiplier = 0.05;
             userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
-    // Beth contains a universe in a universe in one box
     second_bonus(userInstance) {
         if (this.second_bonus_array.price <= userInstance.getMoney){
-            this._earnings += 0.25;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            this._earnings += 0.20;
+            userInstance.loseMoney = this.second_bonus_array.price;
         }
     }
 
-    // Beth is able keep contact with everyone
     third_bonus(userInstance) {
         if (this.third_bonus_array.price <= userInstance.getMoney){
-            userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            this._timing_autoclick -= 40;
+            userInstance.loseMoney = this.third_bonus_array.price;
         }
     }
 }
@@ -247,23 +296,19 @@ class Summer extends Clicker {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/summer.webp";
         this.first_bonus_array = {
-            "name" : "Trusted Helmet",
-            "description" : "...",
-            "price": 100,
+            "description" : "Réduction du temps entre chaque clique.",
+            "price": 1000,
         };
         this.second_bonus_array = {
-            "name" : "Magnetic Umbrella",
-            "description" : "...",
-            "price" : 300
+            "description" : "Amélioration des gains de 20% sur ce personnage.",
+            "price" : 1600
         };
         this.third_bonus_array = {
-            "name" : "Lucky Manual",
-            "description" : "...",
-            "price" : 800
+            "description" : "Permet de multiplier ses gains totaux de 5%",
+            "price" : 2400
         };
     }
 
-   // Increase the trust of Jerry
    first_bonus(userInstance) {
         if (this.first_bonus_array.price <= userInstance.getMoney){
             this._timing_autoclick -= 20;
@@ -271,19 +316,17 @@ class Summer extends Clicker {
         }
     }
 
-    // Jerry attracts all good things to him
     second_bonus(userInstance) {
         if (this.second_bonus_array.price <= userInstance.getMoney){
-            this._earnings += 0.25;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            this._earnings += 0.20;
+            userInstance.loseMoney = this.second_bonus_array.price;
         }
     }
 
-    // Increase the global earning by 5%
     third_bonus(userInstance) {
         if (this.third_bonus_array.price <= userInstance.getMoney){
             userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            userInstance.loseMoney = this.third_bonus_array.price;
         }
     }
 }
@@ -293,43 +336,37 @@ class Morty extends Clicker {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/morty.png";
         this.first_bonus_array = {
-            "name" : "Trusted Helmet",
-            "description" : "...",
-            "price": 100,
+            "description" : "Permet de multiplier ses gains totaux de 5%",
+            "price": 8000,
         };
         this.second_bonus_array = {
-            "name" : "Magnetic Umbrella",
-            "description" : "...",
-            "price" : 300
+            "description" : "Amélioration des gains de 25% sur ce personnage.",
+            "price" : 12000
         };
         this.third_bonus_array = {
-            "name" : "Lucky Manual",
-            "description" : "...",
-            "price" : 800
+            "description" : "Réduction du temps entre chaque clique.",
+            "price" : 16000
         };
     }
 
-    // Increase the trust of Jerry
     first_bonus(userInstance) {
         if (this.first_bonus_array.price <= userInstance.getMoney){
-            this._timing_autoclick -= 20;
+            userInstance.addGlobalMultiplier = 0.05;
             userInstance.loseMoney = this.first_bonus_array.price;
         }
     }
 
-    // Jerry attracts all good things to him
     second_bonus(userInstance) {
         if (this.second_bonus_array.price <= userInstance.getMoney){
             this._earnings += 0.25;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            userInstance.loseMoney = this.second_bonus_array.price;
         }
     }
 
-    // Increase the global earning by 5%
     third_bonus(userInstance) {
         if (this.third_bonus_array.price <= userInstance.getMoney){
-            userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            this._timing_autoclick -= 20;
+            userInstance.loseMoney = this.third_bthis._timing_autoclick -= 20;onus_array.price;
         }
     }
 }
@@ -339,23 +376,19 @@ class Rick extends Clicker {
         super(name, uid, price, earnings, isAutoclicker);
         this._path_image = "src/images/rick.png";
         this.first_bonus_array = {
-            "name" : "Trusted Helmet",
-            "description" : "...",
-            "price": 100,
+            "description" : "Réduction du temps entre chaque clique.",
+            "price": 30000,
         };
         this.second_bonus_array = {
-            "name" : "Magnetic Umbrella",
-            "description" : "...",
-            "price" : 300
+            "description" : "Amélioration des gains de 25% sur ce personnage.",
+            "price" : 40000
         };
         this.third_bonus_array = {
-            "name" : "Lucky Manual",
-            "description" : "...",
-            "price" : 800
+            "description" : "Permet de multiplier ses gains totaux de 3%",
+            "price" : 55000
         };
     }
 
-    // Increase the trust of Jerry
     first_bonus(userInstance) {
         if (this.first_bonus_array.price <= userInstance.getMoney){
             this._timing_autoclick -= 20;
@@ -363,25 +396,25 @@ class Rick extends Clicker {
         }
     }
 
-    // Jerry attracts all good things to him
     second_bonus(userInstance) {
         if (this.second_bonus_array.price <= userInstance.getMoney){
             this._earnings += 0.25;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            userInstance.loseMoney = this.second_bonus_array.price;
         }
     }
 
-    // Increase the global earning by 5%
     third_bonus(userInstance) {
         if (this.third_bonus_array.price <= userInstance.getMoney){
-            userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this.first_bonus_array.price;
+            userInstance.addGlobalMultiplier = 0.3;
+            userInstance.loseMoney = this.third_bonus_array.price;
         }
     }
+    
 }
 
 class Event {
-    static mr_larbin(userInstance) {
+    static mr_larbin(userInstance){
+        userInstance.addEvent();
 
         const body = document.body;
         
@@ -394,7 +427,7 @@ class Event {
 
         const image = document.createElement("img");
         image.src = "src/images/mr_larbin.png";
-        image.className = "mr-larbin";
+        image.className = "event";
         image.id = "event"+id;
         image.addEventListener("mouseenter", () => {
             image.style.cursor = "pointer";
@@ -407,11 +440,10 @@ class Event {
         document.querySelector("#event").appendChild(image);
 
         const createImage = (nb_images) => {
-            userInstance.addEvent();
-            if (nb_images <= max_images) {
+            if (nb_images <= max_images) {this._timing_autoclick -= 20;
                 const image = document.createElement("img");
                 image.src = "src/images/mr_larbin.png";
-                image.className = "mr-larbin";
+                image.className = "event";
                 image.id = "event"+id;
                 
                 image.style.left = Math.random() * window.outerWidth + "px";
@@ -444,10 +476,44 @@ class Event {
             body.style.backgroundImage = 'url("src/images/dimension_35C.webp")';
             createImage(nb_images);
             isClicked = true;
+            userInstance.addEventClicked();
         });
         setInterval(() => {
             if(isClicked == false) {
                 $("#event0").remove();
+            }
+        }, 30000);this._timing_autoclick -= 20;
+    }
+
+    static wayne(userInstance) {
+        const id = 0;
+        userInstance.addEvent();
+
+        let isClicked = false;
+
+        const image = document.createElement("img");
+        image.src = "src/images/mr_boite_a_caca.png";
+        image.className = "event";
+        image.id = "eventwayne";
+        
+        image.style.left = Math.random() * window.outerWidth + "px";
+        image.style.top = Math.random() * window.outerHeight + "px";
+        
+        document.querySelector("#event").appendChild(image);
+
+        $("#eventwayne").click(() => {
+            isClicked = true;
+            userInstance.addEventClicked();
+            userInstance.addGlobalMultiplier = 3;this._timing_autoclick -= 20;
+            setTimeout  (() => {
+                userInstance.loseGlobalMultiplier = 3;
+                $("#eventwayne").remove();
+            }, 30000);
+        });
+
+        setTimeout  (() => {
+            if(isClicked == false) {
+                $("#eventwayne").remove();
             }
         }, 30000);
     }
