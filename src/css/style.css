@@ -19,6 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 /* Titres */ 
@@ -28,25 +29,30 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-}
-
-.title {
-    height: 15%;
-    position: relative;
-    top: 5%;
+    margin: 0;
 }
 
 h1 {
+    position: relative;
+    top: -5%;
     font-family: "rickandmorty", Arial, Helvetica, sans-serif;
     font-size: 3em;
     color:#14ACC9;
     -webkit-text-stroke: 1px #DAE14D;
+    padding: 3% 10%;
+    border: 2px solid #bbb;
+    background-color: rgba(100, 100, 100, 0.8);
+    border-radius: 20px;
 }
 
 h2 {
+    margin: auto;
+    text-align: center;
+    padding: 3% 10%;
+    background-color: #14ACC9;
+    border: 2px solid black;
+    border-radius: 20px;
     font-size: xx-large;
-    position: relative;
-    top: 8%;
     color: #fff;
 }
 
@@ -54,21 +60,30 @@ h2 {
 
 .div-portal {
     width: 80%;
-    user-select: none;
     position: relative;
     display: flex;
     justify-content: center;
 }
 
 .portal {
-    position: relative;
-    top: 15%;
-    width: 60%;
+    width: 70%;
     transform-origin: center;
 }
 
 .color {
     color: white;
+}
+
+/* Credits */
+
+.credits {
+    position:relative;
+    top: 5%;
+    font-size: large;
+    background-color: #14ACC9;
+    padding: 3%;
+    border: 1px solid black;
+    border-radius: 100px;
 }
 
 /* Section de droite (le marché) */
