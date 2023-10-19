@@ -37,19 +37,23 @@ On peut également acheter des bonus représentés par "1", "2" et "3" qui perme
 d'augmenter le multiplicateur global ou encore améliorer le revenu des personnages.
 
 Des évènements peuvent également apparaitre aléatoire sur l'écran et permettent chacun à leur manière
-de gagner pleins de crédits.
+de gagner pleins de crédits (à vous de les découvrir !).
 
 ## Aperçu
 ----------------------------
 
-#TODO ![jeu du projet](src/images/projet.png)
+![jeu du projet](src/images/projet.png)
 
 ## Installation
 ----------------------------
 
 Cloner le dépôt en local à l'aide de la commande git clone.
 
-Lancer la page index.html.
+Lancer un serveur virtuel php à l'aide de la commande
 
-Il ne vous reste plus qu'à jouer !
+php -S localhost:
+
+(Pour réaliser cette étape, php doit être installé au préalable)
+
+Plus qu'à jouer !
 

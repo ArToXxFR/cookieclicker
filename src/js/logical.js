@@ -11,17 +11,17 @@ export class User {
 
     exportJSON() {
 
-        const jsonuser = {}
-
-        jsonuser["money"] = this._money;
-        jsonuser["name"] = this._name;
-        jsonuser["global_multiplier"] = this._global_multiplier;
-        jsonuser["total_click"] = this._total_click;
-        jsonuser["total_events"] = this._total_events;
-        jsonuser["total_events_clicked"] = this._total_events_clicked;
-        jsonuser["total_money"] = this._total_money;
+        const json = JSON.stringify({
+            money: this._money,
+            name: this._name,
+            global_multiplier: this._global_multiplier,
+            total_click: this._total_click,
+            total_events: this._total_events,
+            total_events_clicked: this._total_events_clicked,
+            total_money: this._total_money,
+        });
+        return json;
         
-        return jsonuser;
     }
 
     importJSON(dataJSON) {
@@ -117,6 +117,7 @@ export class Clicker {
     }
 
     importJSON(dataJSON) {
+        console.log(dataJSON)
         this._name = dataJSON.name;
         this._name = dataJSON.multiplier;
         this._price = dataJSON.price;

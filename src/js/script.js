@@ -1,4 +1,4 @@
-import {User, Clicker, PortalGun, Jerry, Beth, Summer, Morty, Rick, Event} from "./logical.js";   
+import {User, PortalGun, Jerry, Beth, Summer, Morty, Rick, Event} from "./logical.js";   
 
 window.onload = () => {
     const user = new User("Alfred");
@@ -242,14 +242,13 @@ window.onload = () => {
     });
 
     $("#importButton").click(() => {
-        console.log("test")
         const content = $("#importTextarea").val();
         const importObject = JSON.parse(content);
-        for (hero of heroes) {
+        for (let hero of heroes) {
             const JSONparsed = JSON.parse(importObject[hero]);
             hero.importJSON(JSONparsed);
         }
-        user.importJSON(JSON.parse(importObject.user));
+        user.importJSON(JSON.parse(importObject["user"]));
         $("#importForm").css("display", "none");
     });
 }
