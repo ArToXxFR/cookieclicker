@@ -1,520 +1,252 @@
-class User {
-    constructor(name) {
-        this._money = 0;
-        this._name = name;
-        this._global_multiplier = 1;
-        this._total_click = 0;
-        this._total_events = 0;
-        this._total_events_clicked = 0;
-        this._total_money = 0;
-    }
+import {User, PortalGun, Jerry, Beth, Summer, Morty, Rick, Event} from "./logical.js";   
 
-    exportJSON() {
+const user = new User("Alfred");
+const portalGun = new PortalGun("Pisto-Portail", "portalgun", 5, 1, false);
+const jerry = new Jerry("Jerry Smith", "jerry", 30, 2, true);  
+const beth = new Beth("Beth Smith", "beth", 150, 8, true);  
+const summer = new Summer("Summer Smith", "summer", 1000, 15, true);  
+const morty = new Morty("Morty Smith", "morty",5000, 30, true);  
+const rick = new Rick("Rick Sanchez", "rick",25000, 80, true);
 
-        const jsonuser = {}
+const heroes = [
+    portalGun,
+    jerry,
+    beth,
+    summer,
+    morty,
+    rick
+];
 
-        jsonuser["money"] = this._money;
-        jsonuser["name"] = this._name;
-        jsonuser["global_multiplier"] = this._global_multiplier;
-        jsonuser["total_click"] = this._total_click;
-        jsonuser["total_events"] = this._total_events;
-        jsonuser["total_events_clicked"] = this._total_events_clicked;
-        jsonuser["total_money"] = this._total_money;
-        
-        return jsonuser;
-    }
+for (const hero of heroes) {
+    let divclicker = document.createElement('div');
+    divclicker.className = "color clicker";
 
-    importJSON(dataJSON) {
-        this._money = dataJSON.money;
-        this._name = dataJSON.name;
-        this._global_multiplier = dataJSON.global_multiplier;
-        this._total_click = dataJSON.total_click;
-        this._total_events = dataJSON.total_events;
-        this._total_events_clicked = dataJSON.total_events_clicked;
-        this._total_money = dataJSON.total_money;
-    }
+    let divitems = document.createElement("div");
+    divitems.className = "div-items";
 
-    set earnMoney(setMoney) {
-        this._money += setMoney*this._global_multiplier;
-        this._total_money += setMoney*this._global_multiplier;
-    }
+    let divitems_first_part = document.createElement("div");
+    divitems_first_part.className = "divitems-first-part";
 
-    set loseMoney(setMoney) {
-        this._money -= setMoney;
-    }
+    let divitems_second_part = document.createElement("div");
+    divitems_second_part.className = "divitems-second-part";
 
-    set addGlobalMultiplier(nb) {
-        this._global_multiplier += nb;
-    }
+    let name = document.createElement("span");
+    name.innerHTML = hero.name;
+    name.className = "items-name";
 
-    set loseGlobalMultiplier(nb) {
-        this._global_multiplier -= nb;
-    }
+    let level = document.createElement("span");
+    level.id = hero+"level";
+    level.className = "level"
 
-    addClick() {
-        this._total_click += 1;
-    }
+    let price = document.createElement("span");
+    price.id = hero+"price";
 
-    addEvent() {
-        this._total_events += 1;
-    }
+    let earn = document.createElement("span");
+    earn.id = hero+"earn";
+    earn.className = "earn currency"
 
-    addEventClicked() {
-        this._total_events_clicked += 1;
-    }
+    let button = document.createElement("button");
+    button.id = hero;
+    button.innerHTML = "Améliorer ↑";
+    button.className = "button"
 
-    get getClick() {
-        return this._total_click;
-    }
 
-    get getMultiplier() {
-        return this._global_multiplier;
-    }
+    let tooltip1 = document.createElement("div");
+    tooltip1.className = "tooltip";
 
-    get getEventClicked() {
-        return this._total_events_clicked;
-    }
+    let tooltip2 = document.createElement("div");
+    tooltip2.className = "tooltip";
 
-    get getEvent() {
-        return this._total_events;
-    }
+    let tooltip3 = document.createElement("div");
+    tooltip3.className = "tooltip";
 
-    get getTotalMoney() {
-        return Math.round(this._total_money);
-    }
+    let bonuses = document.createElement("div");
+    bonuses.className = "bonus-box"
 
-    get getMoney() {
-        return Math.round(this._money);
-    }
+    let firstBonus = document.createElement("span");
+    firstBonus.innerHTML = "<div class='inside-bonus'>1</div>"
+    firstBonus.className = "bonus"
+    firstBonus.id = hero + "firstbonus";
+    let firstBonusPrice = document.createElement("div");
+    firstBonusPrice.className = "bonus-price currency";
+    firstBonusPrice.innerHTML = hero.first_bonus_array.price;
+    tooltip1.appendChild(firstBonusPrice);
+
+    let firstBonusDesc = document.createElement("span");
+    firstBonusDesc.className = "bonus-description";
+    firstBonusDesc.innerHTML = hero.first_bonus_array.description;
+    tooltip1.appendChild(firstBonusDesc);
+
+    let secondBonus = document.createElement("span");
+    secondBonus.innerHTML = "<div class='inside-bonus'>2</div>";
+    secondBonus.className = "bonus";
+    secondBonus.id = hero + "secondbonus";
+
+    secondBonus.appendChild(tooltip2);
+
+    let secondBonusPrice = document.createElement("div");
+    secondBonusPrice.className = "bonus-price currency";
+    secondBonusPrice.innerHTML = hero.second_bonus_array.price;
+    tooltip2.appendChild(secondBonusPrice);
+
+    let secondBonusDesc = document.createElement("span");
+    secondBonusDesc.className = "bonus-description";
+    secondBonusDesc.innerHTML = hero.second_bonus_array.description;
+    tooltip2.appendChild(secondBonusDesc);
+
+    let thirdBonus = document.createElement("span");
+    thirdBonus.innerHTML = "<div class='inside-bonus'>3</div>"
+    thirdBonus.className = "bonus"
+    thirdBonus.id = hero + "thirdbonus"
+
+    thirdBonus.appendChild(tooltip3);
+
+    let thirdBonusPrice = document.createElement("div");
+    thirdBonusPrice.className = "bonus-price currency";
+    thirdBonusPrice.innerHTML = hero.third_bonus_array.price;
+    tooltip3.appendChild(thirdBonusPrice);
+
+    let thirdBonusDesc = document.createElement("span");
+    thirdBonusDesc.className = "bonus-description";
+    thirdBonusDesc.innerHTML = hero.third_bonus_array.description;
+    tooltip3.appendChild(thirdBonusDesc);
+
+
+
+    let divimage = document.createElement("div");
+    divimage.className = "size-item-image";
+    let image = document.createElement("img");
+    image.src = hero.image;
+    image.className = "items-img";
+
+    bonuses.appendChild(firstBonus);
+    bonuses.appendChild(secondBonus);
+    bonuses.appendChild(thirdBonus);
+
+    divimage.appendChild(image);
+
+    divitems_first_part.appendChild(name);
+    divitems_first_part.appendChild(bonuses);
+    divitems_first_part.appendChild(earn);
+
+    divitems_second_part.appendChild(level);
+    button.appendChild(price);
+    divitems_second_part.appendChild(button);
+
+    divitems.appendChild(divitems_first_part);
+    divitems.appendChild(divitems_second_part);
+
+    divclicker.appendChild(divimage);
+    divclicker.appendChild(divitems);
+
+    $("#box-clicker").append(divclicker);
 }
 
-class Clicker {
-    constructor(name, uid, price, earnings, isAutoclicker) {
-        this._name = name;
-        this._multiplier = 1;
-        this._price = price;
-        this._earnings = earnings;
-        this._isAutoclicker = isAutoclicker;
-        this._level = 0;
-        this._timing_autoclick = 1000;
-        this._uid = uid;
+setInterval(() => {
+
+    // Actualiser l'argent
+    $("#money").html(user.getMoney);
+
+    for (const hero of heroes) {
+        $("#"+ hero +"level").html("Niveau : " + Math.round(hero.level));
+        $("#" + hero + "price").html(Math.round(hero.price));
+        $("#" + hero + "earn").html("Revenus : " + Math.round(hero.earnings / (hero.timing_autoclick / 1000)));
     }
 
-    toString() {
-        return this._uid.toString();
+    $("#totalmoney").html(user.getTotalMoney);
+    $("#totalclicks").html(user.getClick);
+    $("#totalevents").html(user.getEvent);
+    $("#totaleventsclicked").html(user.getEventClicked);
+    $("#multiplier").html(user.getMultiplier);
+
+}, 10);
+
+$("#clickEvent").click(() => { portalGun.click(user); user.addClick(); });
+
+$("#portalgun").click(() => portalGun.increaseLevel(user));
+$("#jerry").click(() => { jerry.increaseLevel(user); jerry.startAutoclick(user); });
+$("#beth").click(() => { beth.increaseLevel(user); beth.startAutoclick(user); });
+$("#summer").click(() => { summer.increaseLevel(user); summer.startAutoclick(user); });
+$("#morty").click(() => { morty.increaseLevel(user); morty.startAutoclick(user); });
+$("#rick").click(() => { rick.increaseLevel(user); rick.startAutoclick(user); });
+
+// Bonus PortalGun
+$("#portalgunfirstbonus").click(() => { portalGun.first_bonus(user) });
+$("#portalgunsecondbonus").click(() => { portalGun.second_bonus(user) });
+$("#portalgunthirdbonus").click(() => { portalGun.third_bonus(user) });
+
+// Bonus Jerry
+$("#jerryfirstbonus").click(() => { jerry.first_bonus(user) });
+$("#jerrysecondbonus").click(() => { jerry.second_bonus(user) });
+$("#jerrythirdbonus").click(() => { jerry.third_bonus(user) });
+
+// Bonus Beth
+$("#bethfirstbonus").click(() => { beth.first_bonus(user) });
+$("#bethsecondbonus").click(() => { beth.second_bonus(user) });
+$("#beththirdbonus").click(() => { beth.third_bonus(user) });
+
+// Bonus Summer
+$("#summerfirstbonus").click(() => { summer.first_bonus(user) });
+$("#summerecondbonus").click(() => { summer.second_bonus(user) });
+$("#summerthirdbonus").click(() => { summer.third_bonus(user) });
+
+// Bonus Morty
+$("#mortyfirstbonus").click(() => { morty.first_bonus(user) });
+$("#mortysecondbonus").click(() => { morty.second_bonus(user) });
+$("#mortythirdbonus").click(() => { morty.third_bonus(user) });
+
+// Bonus Rick
+$("#rickfirstbonus").click(() => { rick.first_bonus(user) });
+$("#ricksecondbonus").click(() => { rick.second_bonus(user) });
+$("#rickthirdbonus").click(() => { rick.third_bonus(user) });
+
+
+setInterval(() => {
+    const random = Math.floor(Math.random() * 50);
+    switch(random) {
+        case 1:
+            Event.mr_larbin(user);
+            break;
+        case 2:
+            Event.wayne(user);
+            break;
     }
+}, 20000);
 
-    exportJSON() {
-        const json = JSON.stringify({
-            name: this._name,
-            multiplier: this._multiplier,
-            price: this._price,
-            earnings: this._earnings,
-            level: this._level,
-            timing_autoclick: this._timing_autoclick,
-        });
-        return json;
-    }
+let exportObject = {};
 
-    importJSON(dataJSON) {
-        this._name = dataJSON.name;
-        this._multiplier = dataJSON.multiplier;
-        this._price = dataJSON.price;
-        this._earnings = dataJSON.earnings;
-        this._level = dataJSON.level;
-        this._timing_autoclick = dataJSON.timing_autoclick;
-    }
-
-    increaseLevel(userInstance) {
-        if (this._price <= userInstance.getMoney){
-            this._multiplier *= 1.5;
-            userInstance.loseMoney = this._price;
-            this._price *= 1.75;
-            this._level += 1;
-        }
-    }
-
-    click(userInstance) {
-        userInstance.earnMoney = this._earnings * this._multiplier;
-    }
-
-    startAutoclick(userInstance) {
-        if(this._isAutoclicker && this._level == 1){
-            setInterval(() => {
-                this.click(userInstance);
-            }, this._timing_autoclick);
-    }}  
-
-
-    get earnings() {
-        return this._earnings * this._multiplier;
-    }
-
-    get level() {
-        return this._level;
-    }
-
-    get price() {
-        return this._price;
-    }
-
-    get name() {
-        return this._name;
-    }
-
-    get image(){
-        return this._path_image;
-    }
-
-    get timing_autoclick() {
-        return this._timing_autoclick;
-    }
+for (hero of heroes) {
+    const jsonhero = hero.exportJSON();
+    exportObject[hero] = jsonhero;
 }
 
-class PortalGun extends Clicker {
-    constructor(name, uid, price, earnings, isAutoclicker) {
-        super(name, uid, price, earnings, isAutoclicker);
-        this._path_image = "src/images/portal_gun.png";
-        this.first_bonus_array = {
-            "description" : "Réduction du temps entre chaque clicks.",
-            "price": 100,
-        };
-        this.second_bonus_array = {
-            "description" : "Amélioration des gains de 25% sur ce personnage.",
-            "price" : 300
-        };
-        this.third_bonus_array = {
-            "description" : "Permet de multiplier ses gains totaux de 5%",
-            "price" : 800
-        };
+const jsonuser = user.exportJSON();
+exportObject["user"] = jsonuser;
+
+const fileJSON = JSON.stringify(exportObject);
+
+const file = new Blob([fileJSON], { type: "application/json"});
+
+let downloadJSON = URL.createObjectURL(file);
+
+$("#exportJSON").attr('href', downloadJSON);
+$("#exportJSON").attr('download', "rick-and-morty-clicker-save")
+
+$("#importJSON").click(() => {
+    $("#importForm").css("display", "flex");
+});
+
+$("#closeButton").click(() => {
+    $("#importForm").css("display", "none");
+});
+
+$("#importButton").click(() => {
+    const content = $("#importTextarea").val();
+    const importObject = JSON.parse(content);
+    for (hero of heroes) {
+        const JSONparsed = JSON.parse(importObject[hero]);
+        hero.importJSON(JSONparsed);
     }
-
-    first_bonus(userInstance) {
-        if (this.first_bonus_array.price <= userInstance.getMoney){
-            this._timing_autoclick -= 20;
-            userInstance.loseMoney = this.first_bonus_array.price;
-        }
-    }
-
-    second_bonus(userInstance) {
-        if (this.second_bonus_array.price <= userInstance.getMoney){
-            this._earnings += 0.25;
-            userInstance.loseMoney = this.second_bonus_array.price;
-        }
-    }
-
-    third_bonus(userInstance) {
-        if (this.third_bonus_array.price <= userInstance.getMoney){
-            userInstance.addGlobalMultiplier = 0.05;
-            userInstance.loseMoney = this.third_bonus_array.price;
-        }
-    }
-}
-
-class Jerry extends Clicker {
-    constructor(name, uid, price, earnings, isAutoclicker) {
-        super(name, uid, price, earnings, isAutoclicker);
-        this._path_image = "src/images/jerry.png";
-        this.first_bonus_array = {
-            "description" : "Amélioration des gains de 15% sur ce personnage.",
-            "price": 500,
-        };
-        this.second_bonus_array = {
-            "description" : "Réduction du temps entre chaque clique.",
-            "price" : 800
-        };
-        this.third_bonus_array = {
-            "description" : "Permet de multiplier ses gains totaux de 4%",
-            "price" : 1200
-        };
-    }
-
-    first_bonus(userInstance) {
-        if (this.first_bonus_array.price <= userInstance.getMoney){
-            this._earnings += 0.25;
-            userInstance.loseMoney = this.first_bonus_array.price;
-        }
-    }
-
-    second_bonus(userInstance) {
-        if (this.second_bonus_array.price <= userInstance.getMoney){
-            this._timing_autoclick -= 20;
-            userInstance.loseMoney = this.second_bonus_array.price;
-        }
-    }
-
-    third_bonus(userInstance) {
-        if (this.third_bonus_array.price <= userInstance.getMoney){
-            userInstance.addGlobalMultiplier = 0.04;
-            userInstance.loseMoney = this.third_bonus_array.price;
-        }
-    }
-}
-
-class Beth extends Clicker {
-    constructor(name, uid, price, earnings, isAutoclicker) {
-        super(name, uid, price, earnings, isAutoclicker);
-        this._path_image = "src/images/beth.png";
-        this.first_bonus_array = {
-            "description" : "Permet de multiplier ses gains totaux de 6%",
-            "price" : 1000
-    };
-        this.second_bonus_array = {
-            "description" : "Amélioration des gains de 20% sur ce personnage.",
-            "price" : 1000
-        };
-        this.third_bonus_array = {
-            "description" : "Réduction du temps entre chaque clique.",
-            "price" : 1000
-    };
-    }
-
-    first_bonus(userInstance) {
-        if (this.first_bonus_array.price <= userInstance.getMoney){
-            userInstance.addGlobalMultiplier = 0.05;
-            userInstance.loseMoney = this.first_bonus_array.price;
-        }
-    }
-
-    second_bonus(userInstance) {
-        if (this.second_bonus_array.price <= userInstance.getMoney){
-            this._earnings += 0.20;
-            userInstance.loseMoney = this.second_bonus_array.price;
-        }
-    }
-
-    third_bonus(userInstance) {
-        if (this.third_bonus_array.price <= userInstance.getMoney){
-            this._timing_autoclick -= 40;
-            userInstance.loseMoney = this.third_bonus_array.price;
-        }
-    }
-}
-
-class Summer extends Clicker {
-    constructor(name, uid, price, earnings, isAutoclicker) {
-        super(name, uid, price, earnings, isAutoclicker);
-        this._path_image = "src/images/summer.webp";
-        this.first_bonus_array = {
-            "description" : "Réduction du temps entre chaque clique.",
-            "price": 1000,
-        };
-        this.second_bonus_array = {
-            "description" : "Amélioration des gains de 20% sur ce personnage.",
-            "price" : 1600
-        };
-        this.third_bonus_array = {
-            "description" : "Permet de multiplier ses gains totaux de 5%",
-            "price" : 2400
-        };
-    }
-
-   first_bonus(userInstance) {
-        if (this.first_bonus_array.price <= userInstance.getMoney){
-            this._timing_autoclick -= 20;
-            userInstance.loseMoney = this.first_bonus_array.price;
-        }
-    }
-
-    second_bonus(userInstance) {
-        if (this.second_bonus_array.price <= userInstance.getMoney){
-            this._earnings += 0.20;
-            userInstance.loseMoney = this.second_bonus_array.price;
-        }
-    }
-
-    third_bonus(userInstance) {
-        if (this.third_bonus_array.price <= userInstance.getMoney){
-            userInstance._global_multiplier += 0.05;
-            userInstance.loseMoney = this.third_bonus_array.price;
-        }
-    }
-}
-
-class Morty extends Clicker {
-    constructor(name, uid, price, earnings, isAutoclicker) {
-        super(name, uid, price, earnings, isAutoclicker);
-        this._path_image = "src/images/morty.png";
-        this.first_bonus_array = {
-            "description" : "Permet de multiplier ses gains totaux de 5%",
-            "price": 8000,
-        };
-        this.second_bonus_array = {
-            "description" : "Amélioration des gains de 25% sur ce personnage.",
-            "price" : 12000
-        };
-        this.third_bonus_array = {
-            "description" : "Réduction du temps entre chaque clique.",
-            "price" : 16000
-        };
-    }
-
-    first_bonus(userInstance) {
-        if (this.first_bonus_array.price <= userInstance.getMoney){
-            userInstance.addGlobalMultiplier = 0.05;
-            userInstance.loseMoney = this.first_bonus_array.price;
-        }
-    }
-
-    second_bonus(userInstance) {
-        if (this.second_bonus_array.price <= userInstance.getMoney){
-            this._earnings += 0.25;
-            userInstance.loseMoney = this.second_bonus_array.price;
-        }
-    }
-
-    third_bonus(userInstance) {
-        if (this.third_bonus_array.price <= userInstance.getMoney){
-            this._timing_autoclick -= 20;
-            userInstance.loseMoney = this.third_bthis._timing_autoclick -= 20;onus_array.price;
-        }
-    }
-}
-
-class Rick extends Clicker {
-    constructor(name, uid, price, earnings, isAutoclicker) {
-        super(name, uid, price, earnings, isAutoclicker);
-        this._path_image = "src/images/rick.png";
-        this.first_bonus_array = {
-            "description" : "Réduction du temps entre chaque clique.",
-            "price": 30000,
-        };
-        this.second_bonus_array = {
-            "description" : "Amélioration des gains de 25% sur ce personnage.",
-            "price" : 40000
-        };
-        this.third_bonus_array = {
-            "description" : "Permet de multiplier ses gains totaux de 3%",
-            "price" : 55000
-        };
-    }
-
-    first_bonus(userInstance) {
-        if (this.first_bonus_array.price <= userInstance.getMoney){
-            this._timing_autoclick -= 20;
-            userInstance.loseMoney = this.first_bonus_array.price;
-        }
-    }
-
-    second_bonus(userInstance) {
-        if (this.second_bonus_array.price <= userInstance.getMoney){
-            this._earnings += 0.25;
-            userInstance.loseMoney = this.second_bonus_array.price;
-        }
-    }
-
-    third_bonus(userInstance) {
-        if (this.third_bonus_array.price <= userInstance.getMoney){
-            userInstance.addGlobalMultiplier = 0.3;
-            userInstance.loseMoney = this.third_bonus_array.price;
-        }
-    }
-    
-}
-
-class Event {
-    static mr_larbin(userInstance){
-        userInstance.addEvent();
-
-        const body = document.body;
-        
-        let nb_images = 0;
-        let interval = 1000;
-        const max_images = 30;
-        let id = 0;
-
-        let isClicked = false;
-
-        const image = document.createElement("img");
-        image.src = "src/images/mr_larbin.png";
-        image.className = "event";
-        image.id = "event"+id;
-        image.addEventListener("mouseenter", () => {
-            image.style.cursor = "pointer";
-        });
-        id++;
-        
-        image.style.left = Math.random() * window.outerWidth + "px";
-        image.style.top = Math.random() * window.outerHeight + "px";
-        
-        document.querySelector("#event").appendChild(image);
-
-        const createImage = (nb_images) => {
-            if (nb_images <= max_images) {this._timing_autoclick -= 20;
-                const image = document.createElement("img");
-                image.src = "src/images/mr_larbin.png";
-                image.className = "event";
-                image.id = "event"+id;
-                
-                image.style.left = Math.random() * window.outerWidth + "px";
-                image.style.top = Math.random() * window.outerHeight + "px";
-                
-                document.querySelector("#event").appendChild(image);
-
-                const audio = new Audio('src/audio/mr_larbin.mp3');
-
-                userInstance.earnMoney = userInstance._money * 0.04;
-                
-                audio.play();
-
-                interval -= 30;
-                id++;
-
-                setTimeout(() => {
-                    createImage(nb_images+1);
-                }, interval);
-            } else {
-                for(let i = 0; i <= max_images; i++){
-                    let image = document.querySelector("#event"+i);
-                    image.remove();
-                    body.style.backgroundImage = 'url("src/images/fond.jpg")';
-                }
-            }
-        }
-
-        $("#event0").click(() => {
-            body.style.backgroundImage = 'url("src/images/dimension_35C.webp")';
-            createImage(nb_images);
-            isClicked = true;
-            userInstance.addEventClicked();
-        });
-        setInterval(() => {
-            if(isClicked == false) {
-                $("#event0").remove();
-            }
-        }, 30000);this._timing_autoclick -= 20;
-    }
-
-    static wayne(userInstance) {
-        const id = 0;
-        userInstance.addEvent();
-
-        let isClicked = false;
-
-        const image = document.createElement("img");
-        image.src = "src/images/mr_boite_a_caca.png";
-        image.className = "event";
-        image.id = "eventwayne";
-        
-        image.style.left = Math.random() * window.outerWidth + "px";
-        image.style.top = Math.random() * window.outerHeight + "px";
-        
-        document.querySelector("#event").appendChild(image);
-
-        $("#eventwayne").click(() => {
-            isClicked = true;
-            userInstance.addEventClicked();
-            userInstance.addGlobalMultiplier = 3;this._timing_autoclick -= 20;
-            setTimeout  (() => {
-                userInstance.loseGlobalMultiplier = 3;
-                $("#eventwayne").remove();
-            }, 30000);
-        });
-
-        setTimeout  (() => {
-            if(isClicked == false) {
-                $("#eventwayne").remove();
-            }
-        }, 30000);
-    }
-}
+    user.importJSON(JSON.parse(importObject.user));
+    $("#importForm").css("display", "none");
+});

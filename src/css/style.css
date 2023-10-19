@@ -261,6 +261,7 @@ h2 {
 /* Evenements aléatoires */
 
 .event {
+    cursor: pointer;
     position: fixed;
     width: 100px;
     height: 100px;
@@ -283,6 +284,7 @@ h2 {
 }
 
 .json-button {
+    font-weight: bold;
     color: #14ACC9;
     margin: 5px;
     padding: 5px;
